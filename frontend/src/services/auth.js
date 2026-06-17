@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://127.0.0.1:5000/auth"; // Sesuaikan dengan backend
+const API_URL = "https://api.growtrack.harkatnegeri.ac.id/auth"; // Sesuaikan dengan backend
+
+// const API_URL = "http://127.0.0.1:5000/auth"; // Sesuaikan dengan backend
 
 export const login = async (email, password) => {
   try {
