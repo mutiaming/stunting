@@ -9,7 +9,7 @@ backend/**/*.pyc
 backend/**/*.pyo
 
 # Python cache
-**/__pycache__/
+**/__pycache__/q
 *.pyc
 
 # ======================

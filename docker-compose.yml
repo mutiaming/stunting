@@ -1,0 +1,42 @@
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: stunting-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: stunting_db
+      MYSQL_USER: stunting
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    container_name: stunting-backend
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: stunting
+      DB_PASSWORD: password
+      DB_NAME: stunting_db
+      JWT_SECRET_KEY: secret
+
+  frontend:
+    build: ./frontend
+    container_name: stunting-frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
