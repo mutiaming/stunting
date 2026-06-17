@@ -15,7 +15,7 @@ class Config:
 
     ALLOWED_ORIGINS = os.getenv(
         'ALLOWED_ORIGINS',
-        'https://growtrack.harkatnegeri.ac.id'
+        'https://api.growtrack.harkatnegeri.ac.id'
     ).split(',')
 
 # class Config:
