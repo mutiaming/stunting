@@ -15,7 +15,7 @@ class Config:
 
     ALLOWED_ORIGINS = os.getenv(
         'ALLOWED_ORIGINS',
-        'http://localhost:3000'
+        'https://growtrack.harkatnegeri.ac.id'
     ).split(',')
 
 # class Config:
