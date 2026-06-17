@@ -29,8 +29,7 @@ def create_app(config_class=Config):
     # Configure CORS
     cors.init_app(
         app,
-        resources={r"/*": {"origins": "*"}},
-        supports_credentials=True
+        resources={r"/*": {"origins": "*"}}
     )
 
     # Register blueprints
