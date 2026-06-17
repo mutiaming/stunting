@@ -29,7 +29,7 @@ def create_app(config_class=Config):
     # Configure CORS
     cors.init_app(
         app,
-        resources={r"/*": {"origins": app.config['ALLOWED_ORIGINS']}},
+        resources={r"/*": {"origins": "*"}},
         supports_credentials=True
     )
 
