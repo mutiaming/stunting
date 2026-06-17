@@ -1,5 +1,4 @@
 services:
-
   db:
     image: mysql:8.0
     container_name: stunting-db
@@ -15,11 +14,12 @@ services:
       - mysql_data:/var/lib/mysql
 
   backend:
-    build: ./backend
+    # Menggunakan image dari GHCR, bukan build lokal lagi
+    image: ghcr.io/USERNAME_GITHUB_ANDA/stunting-backend:latest
     container_name: stunting-backend
     restart: always
     ports:
-      - "5000:5000"
+      - "127.0.0.1:5000:5000"
     depends_on:
       - db
     environment:
@@ -30,11 +30,12 @@ services:
       JWT_SECRET_KEY: secret
 
   frontend:
-    build: ./frontend
+    # Menggunakan image dari GHCR, bukan build lokal lagi
+    image: ghcr.io/USERNAME_GITHUB_ANDA/stunting-frontend:latest
     container_name: stunting-frontend
     restart: always
     ports:
-      - "3000:80"
+      - "127.0.0.1:3000:80"
     depends_on:
       - backend
 
