@@ -13,7 +13,7 @@ const HasilPrediksi = () => {
   useEffect(() => {
     const fetchPrediksi = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5000/stunting/history", {
+        const response = await fetch("https://api.growtrack.harkatnegeri.ac.id/stunting/history", {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         const data = await response.json();
@@ -25,7 +25,7 @@ const HasilPrediksi = () => {
 
     const fetchUserRole = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5000/auth/profile", {
+        const response = await fetch("https://api.growtrack.harkatnegeri.ac.id/auth/profile", {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         const data = await response.json();

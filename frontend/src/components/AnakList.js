@@ -25,7 +25,7 @@ const AnakList = () => {
   const fetchBidanData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://127.0.0.1:5000/auth/profile", {
+      const response = await axios.get("https://api.growtrack.harkatnegeri.ac.id/auth/profile", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -41,7 +41,7 @@ const AnakList = () => {
   const fetchAnak = async (bidanId) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`http://127.0.0.1:5000/anak/list?bidan_id=${bidanId}`, {
+      const response = await axios.get(`https://api.growtrack.harkatnegeri.ac.id/anak/list?bidan_id=${bidanId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -56,7 +56,7 @@ const AnakList = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://127.0.0.1:5000/anak/tambah",
+        "https://api.growtrack.harkatnegeri.ac.id/anak/tambah",
         { ...newAnak, bidan_id: bidanId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -75,7 +75,7 @@ const AnakList = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://127.0.0.1:5000/anak/edit/${editAnak.id}`,
+        `https://api.growtrack.harkatnegeri.ac.id/anak/edit/${editAnak.id}`,
         editAnak,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -91,7 +91,7 @@ const AnakList = () => {
   const handleDeleteAnak = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://127.0.0.1:5000/anak/hapus/${deleteAnakId}`, {
+      await axios.delete(`https://api.growtrack.harkatnegeri.ac.id/anak/hapus/${deleteAnakId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

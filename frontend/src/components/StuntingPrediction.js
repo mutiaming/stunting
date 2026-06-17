@@ -65,7 +65,7 @@ const StuntingPrediction = () => {
   useEffect(() => {
     const fetchAnakData = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5000/anak/list", {
+        const response = await fetch("https://api.growtrack.harkatnegeri.ac.id/anak/list", {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         
@@ -130,7 +130,7 @@ const StuntingPrediction = () => {
       console.log("Submitting data:", requestData);
 
       // API call
-      const response = await fetch("http://127.0.0.1:5000/stunting/predict", {
+      const response = await fetch("https://api.growtrack.harkatnegeri.ac.id/stunting/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
