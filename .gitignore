@@ -1,0 +1,47 @@
+# ======================
+# Backend (Flask)
+# ======================
+backend/venv/
+backend/__pycache__/
+backend/*.db
+backend/.env
+backend/**/*.pyc
+backend/**/*.pyo
+
+# Python cache
+**/__pycache__/
+*.pyc
+
+# ======================
+# Frontend (React)
+# ======================
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+# React env
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.production.local
+frontend/.env.test.local
+
+# ======================
+# IDE
+# ======================
+.vscode/
+.idea/
+
+# ======================
+# Logs
+# ======================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ======================
+# OS
+# ======================
+.DS_Store
+Thumbs.db

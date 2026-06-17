@@ -1,0 +1,163 @@
+/* Styling default */
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #0F52BA;
+}
+
+.App-link {
+  color: #1e1c8b;
+}
+
+/* Styling Carousel */
+.carousel-container {
+  width: 100vw;
+  padding: 20px 0;
+  background-color: #fafdff;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.6); /* Warna tombol */
+  border-radius: 50%; /* Biar bulat */
+  padding: 10px; /* Tambah padding supaya lebih besar */
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.8); /* Warna lebih gelap saat di-hover */
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.carousel-caption {
+  color: black !important; /* Warna teks utama */
+  background: rgba(255, 255, 255, 0.7); /* Background putih transparan */
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.carousel-caption h3 {
+  color: darkblue !important; /* Warna judul */
+}
+
+.carousel-caption p {
+  color: black !important; /* Warna deskripsi */
+}
+/* Styling untuk Tabs Navbar */
+.navbar-tabs-container {
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.6); /* Kotakan transparan */
+  padding: 10px 0;
+}
+
+.navbar-tabs .tab-link {
+  color: white !important;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 10px; /* Kotakan sudut melengkung */
+  background-color: rgba(255, 255, 255, 0.2); /* Transparan putih */
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-tabs .tab-link:hover {
+  background-color: rgba(35, 49, 173, 0.4); /* Efek hover lebih jelas */
+}
+/* Styling untuk Tabs Navbar */
+.navbar-tabs-container {
+  width: 100vw;
+  background-color: rgba(62, 73, 224, 0.6); /* Kotakan transparan */
+  padding: 10px 0;
+}
+
+.navbar-tabs .tab-link {
+  color: white !important;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-tabs .tab-link:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Warna berbeda untuk tab yang sedang aktif */
+.navbar-tabs .active-tab {
+  background-color: #ffcc00 !important; /* Warna kuning keemasan */
+  color: black !important;
+}
+/* Styling untuk navbar tabs */
+.navbar-tabs-container {
+  background-color: #007bff; /* Warna primary */
+  padding: 10px 0;
+}
+
+.navbar-tabs .tab-link,
+.navbar-tabs .dropdown-toggle {
+  color: white !important;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.navbar-tabs .tab-link:hover,
+.navbar-tabs .dropdown-toggle:hover,
+.navbar-tabs .active-tab {
+  background-color: #0056b3; /* Warna lebih gelap saat aktif/hover */
+  border-radius: 5px;
+}
+
+/* Styling untuk dropdown */
+.navbar-tabs .dropdown-menu {
+  background-color: #007bff;
+  border: none;
+}
+
+.navbar-tabs .dropdown-item {
+  color: white !important;
+  font-weight: bold;
+}
+
+.navbar-tabs .dropdown-item:hover {
+  background-color: #0056b3;
+}
+.deskripsi {
+  line-height: 1.6; /* Menambah jarak antar baris */
+  margin-bottom: 10px; /* Menambah jarak antar elemen */
+}
