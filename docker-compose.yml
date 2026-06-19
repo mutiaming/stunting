@@ -15,7 +15,7 @@ services:
 
   backend:
     # Menggunakan image dari GHCR, bukan build lokal lagi
-    image: ghcr.io/USERNAME_GITHUB_ANDA/stunting-backend:latest
+    image: ghcr.io/mutiaming/stunting-backend:latest
     container_name: stunting-backend
     restart: always
     ports:
@@ -31,7 +31,7 @@ services:
 
   frontend:
     # Menggunakan image dari GHCR, bukan build lokal lagi
-    image: ghcr.io/USERNAME_GITHUB_ANDA/stunting-frontend:latest
+    image: ghcr.io/mutiaming/stunting-frontend:latest
     container_name: stunting-frontend
     restart: always
     ports:
