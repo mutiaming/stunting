@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Container, Row, Col, ProgressBar, Alert, Card, Navbar,ListGroup} from "react-bootstrap";
+import { Form, Button, Container, Row, Col, ProgressBar, Alert, Card, Navbar, ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import SideBidan from "./SideBidan";
 
@@ -46,7 +46,7 @@ const StuntingPrediction = () => {
       navigate("/login");
       return;
     }
-    
+
     try {
       const tokenData = JSON.parse(atob(token.split(".")[1]));
       if (Date.now() >= tokenData.exp * 1000) {
@@ -68,11 +68,11 @@ const StuntingPrediction = () => {
         const response = await fetch("https://api.growtrack.harkatnegeri.ac.id/anak/list", {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
-        
+
         if (!response.ok) {
           throw new Error("Gagal mengambil data anak");
         }
-        
+
         const data = await response.json();
         setAnakList(Array.isArray(data.data) ? data.data : []);
       } catch (error) {
@@ -81,8 +81,48 @@ const StuntingPrediction = () => {
         setAnakList([]);
       }
     };
-    
+
     fetchAnakData();
+  }, []);
+
+  useEffect(() => {
+
+    const fetchAlatData = async () => {
+
+      try {
+
+        const response = await fetch(
+          "https://api.growtrack.harkatnegeri.ac.id/stunting/alat/latest"
+        );
+
+        if (!response.ok) return;
+
+        const result = await response.json();
+
+        if (result.data) {
+
+          setFormData(prev => ({
+            ...prev,
+            tinggi_badan: result.data.tinggi_badan,
+            berat_badan: result.data.berat_badan
+          }));
+
+        }
+
+      } catch (error) {
+
+        console.error("Gagal mengambil data alat:", error);
+
+      }
+
+    };
+
+    fetchAlatData();
+
+    const interval = setInterval(fetchAlatData, 3000);
+
+    return () => clearInterval(interval);
+
   }, []);
 
   // Handlers
@@ -94,7 +134,7 @@ const StuntingPrediction = () => {
   const handleNamaAnakChange = (e) => {
     const selectedNamaAnak = e.target.value;
     const selectedAnak = anakList.find(a => a.nama_anak === selectedNamaAnak);
-    
+
     if (selectedAnak) {
       setFormData(prev => ({
         ...prev,
@@ -149,14 +189,14 @@ const StuntingPrediction = () => {
 
       // Process response data
       const responseData = result.data || result;
-      
+
       if (typeof responseData.z_score === 'undefined') {
         throw new Error("Data z_score tidak ditemukan dalam response");
       }
 
       // Determine status consistently
-      const status = responseData.result || 
-                    (responseData.z_score < STUNTING_THRESHOLD ? "Stunting" : "Tidak Stunting");
+      const status = responseData.result ||
+        (responseData.z_score < STUNTING_THRESHOLD ? "Stunting" : "Tidak Stunting");
 
       setApiResponse({
         z_score: parseFloat(responseData.z_score),
@@ -191,7 +231,7 @@ const StuntingPrediction = () => {
         <Navbar bg="light" expand="lg" className="mb-3">
           <Navbar.Brand>Sistem Prediksi Stunting</Navbar.Brand>
         </Navbar>
-        
+
         <Card className="shadow-lg p-4 border-0">
           <h2 className="text-center mb-4 text-primary">Prediksi Stunting</h2>
 
@@ -221,11 +261,11 @@ const StuntingPrediction = () => {
               <Col md={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>NIK</Form.Label>
-                  <Form.Control 
-                    type="text" 
-                    name="nik" 
-                    value={formData.nik} 
-                    readOnly 
+                  <Form.Control
+                    type="text"
+                    name="nik"
+                    value={formData.nik}
+                    readOnly
                   />
                 </Form.Group>
               </Col>
@@ -234,50 +274,50 @@ const StuntingPrediction = () => {
                 <Form.Group className="mb-3">
                   <Form.Label>Nama Orang Tua</Form.Label>
                   <Form.Control type="text" name="nama_orang_tua" value={formData.nama_orang_tua} readOnly />
-                              </Form.Group>
-                            </Col>
-                            <Col md={6}>
-                              <Form.Group className="mb-3">
-                                <Form.Label>Jenis Kelamin</Form.Label>
-                                <Form.Select name="jenis_kelamin" value={formData.jenis_kelamin} onChange={handleChange} required>
-                                  <option value="">Pilih Jenis Kelamin</option>
-                                  <option value="Laki-laki">Laki-laki</option>
-                                  <option value="Perempuan">Perempuan</option>
-                                </Form.Select>
-                              </Form.Group>
-                            </Col>
-                            <Col md={6}>
-                              <Form.Group className="mb-3">
-                                <Form.Label>Umur (bulan)</Form.Label>
-                                <Form.Control type="number" name="umur" value={formData.umur} onChange={handleChange} required />
-                              </Form.Group>
-                            </Col>
-                            <Col md={6}>
-                              <Form.Group className="mb-3">
-                                <Form.Label>Tinggi Badan (cm)</Form.Label>
-                                <Form.Control type="number" step="0.1" name="tinggi_badan" value={formData.tinggi_badan} onChange={handleChange} required />
-                              </Form.Group>
-                            </Col>
-                            <Col md={6}>
-                              <Form.Group className="mb-3">
-                                <Form.Label>Berat Badan (kg)</Form.Label>
-                                <Form.Control type="number" step="0.1" name="berat_badan" value={formData.berat_badan} onChange={handleChange} required />
-                              </Form.Group>
-                            </Col>
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Jenis Kelamin</Form.Label>
+                  <Form.Select name="jenis_kelamin" value={formData.jenis_kelamin} onChange={handleChange} required>
+                    <option value="">Pilih Jenis Kelamin</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Umur (bulan)</Form.Label>
+                  <Form.Control type="number" name="umur" value={formData.umur} onChange={handleChange} required />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Tinggi Badan (cm)</Form.Label>
+                  <Form.Control type="number" step="0.1" name="tinggi_badan" value={formData.tinggi_badan} onChange={handleChange} required />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Berat Badan (kg)</Form.Label>
+                  <Form.Control type="number" step="0.1" name="berat_badan" value={formData.berat_badan} onChange={handleChange} required />
+                </Form.Group>
+              </Col>
             </Row>
 
             {loading && (
-              <ProgressBar 
-                animated 
-                now={progress} 
-                label={`${progress}%`} 
-                className="mb-3" 
+              <ProgressBar
+                animated
+                now={progress}
+                label={`${progress}%`}
+                className="mb-3"
               />
             )}
 
-            <Button 
-              variant="primary" 
-              type="submit" 
+            <Button
+              variant="primary"
+              type="submit"
               disabled={loading}
             >
               {loading ? "Memprediksi..." : "Prediksi"}
@@ -300,9 +340,9 @@ const StuntingPrediction = () => {
                     (Berdasarkan cutoff Z-Score &lt; {STUNTING_THRESHOLD})
                   </small>
                 </p>
-                
+
                 <hr />
-                
+
                 <h5>Detail Input</h5>
                 <p><strong>Nama Anak:</strong> {formData.nama_anak}</p>
                 <p><strong>Umur:</strong> {formData.umur} bulan</p>
