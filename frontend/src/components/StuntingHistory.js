@@ -71,6 +71,7 @@ const HasilPrediksi = () => {
       index + 1,
       item.nama_anak,
       item.nik,
+      item.tanggal_prediksi,
       item.nama_ortu || "-",
       item.jenis_kelamin,
       item.umur,
@@ -82,7 +83,7 @@ const HasilPrediksi = () => {
     
     doc.autoTable({
       head: [
-        ['No', 'Nama Anak', 'NIK', 'Nama Orang Tua', 'Jenis Kelamin', 'Umur', 'BB', 'TB', 'Z-Score', 'Status']
+        ['No', 'Nama Anak', 'NIK', 'Tanggal Prediksi', 'Nama Orang Tua', 'Jenis Kelamin', 'Umur', 'BB', 'TB', 'Z-Score', 'Status']
       ],
       body: tableData,
       startY: 40,
@@ -146,6 +147,7 @@ const HasilPrediksi = () => {
               <th>No</th>
               <th>Nama Anak</th>
               <th>NIK</th>
+              <th>Tanggal Prediksi</th>
               <th>Nama Orang Tua</th>
               <th>Jenis Kelamin</th>
               <th>Umur</th>
@@ -162,6 +164,7 @@ const HasilPrediksi = () => {
                   <td>{index + 1}</td>
                   <td>{item.nama_anak}</td>
                   <td>{item.nik}</td>
+                  <td>{item.tanggal_prediksi}</td>
                   <td>{item.nama_ortu || "-"}</td>
                   <td>{item.jenis_kelamin}</td>
                   <td>{item.umur}</td>

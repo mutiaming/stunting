@@ -234,6 +234,7 @@ def history():
             StuntingPrediction.umur,
             StuntingPrediction.z_score,
             StuntingPrediction.hasil_prediksi,
+            StuntingPrediction.tanggal_prediksi,
             Anak.nama_orang_tua,
         ).join(
             Anak, StuntingPrediction.id_anak == Anak.id
@@ -258,7 +259,8 @@ def history():
                 "jenis_kelamin": pred.jenis_kelamin,
                 "umur": int(pred.umur),
                 "z_score": float(pred.z_score),
-                "hasil_prediksi": pred.hasil_prediksi
+                "hasil_prediksi": pred.hasil_prediksi,
+                "tanggal_prediksi": pred.tanggal_prediksi.strftime("%d-%m-%Y")
             }
             for pred in predictions
         ]
