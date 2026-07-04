@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Table, Container, Navbar, Form, FormControl, Button, Dropdown } from "react-bootstrap";
 import Sidebar from "./Sidebar";
@@ -5,6 +6,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 
 const HasilPrediksi = () => {
+  const navigate = useNavigate();
   const [prediksiList, setPrediksiList] = useState([]);
   const [searchNIK, setSearchNIK] = useState("");
   const [role, setRole] = useState("");
@@ -155,6 +157,7 @@ const HasilPrediksi = () => {
               <th>TB</th>
               <th>Z-Score</th>
               <th>Status</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -173,6 +176,11 @@ const HasilPrediksi = () => {
                   <td>{item.z_score.toFixed(2)}</td>
                   <td className={item.hasil_prediksi === "Stunting" ? "text-danger fw-bold" : "text-success fw-bold"}>
                     {item.hasil_prediksi}
+                  </td>
+                  <td>
+                    <Button variant="info" size="sm" onClick={() => navigate(`/GrafikPertumbuhan/${item.nik}`)}>
+                      📈 Grafik
+                    </Button>
                   </td>
                 </tr>
               ))

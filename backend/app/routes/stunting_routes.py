@@ -6,6 +6,7 @@ from app import db
 from app.models import StuntingPrediction, User, Anak, DeviceData
 import logging
 from datetime import datetime
+from sqlalchemy import extract
 
 stunting_bp = Blueprint("stunting", __name__)
 
@@ -273,3 +274,68 @@ def history():
     except Exception as e:
         logger.error(f"Error mendapatkan riwayat: {str(e)}")
         return jsonify({"message": "Gagal mendapatkan riwayat"}), 500
+    
+@stunting_bp.route("/chart/<string:nik>", methods=["GET"])
+@jwt_required()
+def chart(nik):
+
+    try:
+        user_id = get_jwt_identity()
+        user = User.query.get(user_id)
+
+        if not user:
+            return jsonify({"message": "User tidak ditemukan"}), 404
+
+        month = request.args.get("month")
+
+        if not month:
+            return jsonify({
+                "message": "Parameter month wajib diisi. Contoh: ?month=2025-06"
+            }), 400
+
+        try:
+            year, month_number = map(int, month.split("-"))
+        except ValueError:
+            return jsonify({
+                "message": "Format month harus YYYY-MM"
+            }), 400
+
+        query = (
+            StuntingPrediction.query
+            .filter(
+                StuntingPrediction.nik == nik,
+                extract("year", StuntingPrediction.tanggal_prediksi) == year,
+                extract("month", StuntingPrediction.tanggal_prediksi) == month_number
+            )
+            .order_by(StuntingPrediction.tanggal_prediksi.asc())
+        )
+
+        # Jika bukan admin hanya boleh melihat datanya sendiri
+        if user.role != "admin":
+            query = query.filter(StuntingPrediction.user_id == user_id)
+
+        predictions = query.all()
+
+        chart_data = []
+
+        for pred in predictions:
+            chart_data.append({
+                "tanggal": pred.tanggal_prediksi.strftime("%d-%m-%Y"),
+                "berat_badan": float(pred.berat_badan),
+                "tinggi_badan": float(pred.tinggi_badan),
+                "z_score": float(pred.z_score),
+                "status": pred.hasil_prediksi
+            })
+
+        return jsonify({
+            "message": "Data grafik berhasil diambil",
+            "nik": nik,
+            "jumlah_data": len(chart_data),
+            "chart": chart_data
+        }), 200
+
+    except Exception as e:
+        logger.error(f"Error chart: {str(e)}")
+        return jsonify({
+            "message": "Gagal mengambil data grafik"
+        }), 500

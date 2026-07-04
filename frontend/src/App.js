@@ -41,6 +41,7 @@ function App() {
         <Route path="/DaftarAkun" element={<UserList />} />
         <Route path="/KelolaMpasi" element={<MpasiList />} />
         <Route path="/About" element={<About />} />
+        <Route path="/GrafikPertumbuhan/:nik" element={<GrafikPertumbuhan />}/>
       </Routes>
     </Router>
   );
