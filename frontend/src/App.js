@@ -18,6 +18,7 @@ import AdminDashboard from"./components/AdminDashboard";
 import UserList from "./components/DaftarAkun";
 import MpasiList from "./components/KelolaMpasi";
 import About from "./components/About";
+import GrafikPertumbuhan from "./pages/GrafikPertumbuhan";
 
 function App() {
   return (
